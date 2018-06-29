@@ -8,12 +8,12 @@ def parseOutText(f):
         metadata block at the top
         (in Part 2, you will also add stemming capabilities)
         and return a string that contains all the words
-        in the email (space-separated) 
-        
+        in the email (space-separated)
+
         example use case:
         f = open("email_file_name.txt", "r")
         text = parseOutText(f)
-        
+
         """
 
 
@@ -28,19 +28,27 @@ def parseOutText(f):
         text_string = content[1].translate(string.maketrans("", ""), string.punctuation)
 
         ### project part 2: comment out the line below
-        words = text_string
+        # words = text_string
+        # Hi Everyone  If you can read this message youre properly using parseOutText  Please proceed to the next part of the project
+
 
         ### split the text string into individual words, stem each word,
         ### and append the stemmed word to words (make sure there's a single
         ### space between each stemmed word)
-        
-
-
-
+        from nltk.stem.snowball import SnowballStemmer
+        stemmer = SnowballStemmer("english")
+        tmp = []
+        for token in text_string.split():
+            if token != "":
+                tmp.append(stemmer.stem(token))
+                # words += " " + stemmer.stem(token)
+        words = ' '.join(tmp)
 
     return words
 
-    
+# https://archive.org/details/2011_04_02_enron_email_dataset
+
+
 
 def main():
     ff = open("../text_learning/test_email.txt", "r")
@@ -51,4 +59,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

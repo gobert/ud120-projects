@@ -24,14 +24,16 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 ### your code goes here ###
+features_train = features_train[:len(features_train)]
+labels_train = labels_train[:len(labels_train)]
+
 from sklearn.metrics import accuracy_score
 import numpy as np
-from sklearn.naive_bayes import GaussianNB
+from sklearn import neighbors, datasets
 
 # Train model
-import code; code.interact(local=dict(globals(), **locals()))
-
-clf = GaussianNB()
+# import code; code.interact(local=dict(globals(), **locals()))
+clf = neighbors.KNeighborsClassifier(100, weights='uniform')
 t0 = time()
 clf.fit(features_train, labels_train)
 
